@@ -2,12 +2,23 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import ProductList from './ProductList';
 import AboutUs from './AboutUs';
+import CartItem from './CartItem'; // Import the CartItem component
 import './App.css';
 
 function App() {
   return (
     <Router>
       <div className="app-container">
+        <header className="header">
+          <nav>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/products">Products</Link></li>
+              <li><Link to="/cart">Cart</Link></li>
+            </ul>
+          </nav>
+        </header>
+
         <Routes>
           {/* Landing Page Route */}
           <Route
@@ -35,7 +46,10 @@ function App() {
           {/* Product List Page Route */}
           <Route path="/products" element={<ProductList />} />
 
-          {/* Additional Pages can be added like this */}
+          {/* Cart Page Route */}
+          <Route path="/cart" element={<CartItem />} />
+
+          {/* Additional Pages can be added here */}
           {/* <Route path="/about" element={<AboutUs />} /> */}
         </Routes>
       </div>
