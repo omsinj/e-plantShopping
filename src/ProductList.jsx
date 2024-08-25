@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+iimport React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../slices/CartSlice'; // Redux action to add item to cart
 import './ProductList.css'; // Assuming you have a CSS file for styling
 
+// Array of plants
 const plantsArray = [
   {
     id: 1,
@@ -58,6 +59,7 @@ const ProductList = () => {
   const [addedToCart, setAddedToCart] = useState({});
   const dispatch = useDispatch();
 
+  // Handle adding plant to cart
   const handleAddToCart = (plant) => {
     dispatch(addItem(plant)); // Dispatch action to add item to cart
 
@@ -72,5 +74,22 @@ const ProductList = () => {
     <div className="product-grid">
       {plantsArray.map((plant) => (
         <div key={plant.id} className="plant-card">
-          <img src={plant.image} alt={plant.name} classN
+          <img src={plant.image} alt={plant.name} className="plant-image" />
+          <div className="plant-details">
+            <h3 className="plant-name">{plant.name}</h3>
+            <p className="plant-description">{plant.description}</p>
+            <p className="plant-cost">${plant.cost.toFixed(2)}</p>
+            <button 
+              className={`add-to-cart-button ${addedToCart[plant.name] ? 'added' : ''}`}
+              onClick={() => handleAddToCart(plant)}
+            >
+              {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
+export default ProductList;
